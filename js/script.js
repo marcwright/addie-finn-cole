@@ -7,13 +7,13 @@ $(function() {
       playerTurn = players[1];
       $('#playerTurnDiv').text(players[0] + "'s Turn!!");
       $('#board').css('border', '10px solid blue');
-      $(clickedCell).addClass(playerTurn);
+      $(clickedCell).addClass(playerTurn).css('background-size', '100%');
     }
     else {
       playerTurn = players[0];
       $('#playerTurnDiv').text(players[1] + "'s Turn!!");
       $('#board').css('border', '10px solid red');
-      $(clickedCell).addClass(playerTurn);
+      $(clickedCell).addClass(playerTurn).css('background-size', '100%');
     };
   }
 
@@ -32,7 +32,7 @@ $(function() {
     counter = 0;
     $('#playerTurnDiv').text(players[0] + "'s Turn!!");
     console.log(counter, moves, playerTurn);
-    $('.cell').on('click', playerClick).removeClass('red blue').html('');
+    $('.cell').on('click', playerClick).removeClass('Finnman Addie Coleman');
     console.log("reset the board function");
     $('#container').fadeIn(2000);
     $('#startScreen').fadeOut(2000);
@@ -42,7 +42,7 @@ $(function() {
 
   var freezeBoard = function() {
     $('#board').fadeOut(2000),
-      $('#winnerDiv').fadeIn(4000)
+      $('#winnerDiv').fadeIn(4000).addClass(playerTurn).css('background-size', '100%')
       .html('<h1>' + playerTurn + ' is the winner!</h1>')
     return
   };
@@ -87,6 +87,10 @@ $(function() {
 
   function choosePlayerOne() {
     $('#clickChoice').text("Player one, click on your Avatar!");
+
+    $('.choice').on('hover', function(){
+      $(this).addClass('animated pulse');
+    });
 
     $('.choice').on('click', function(){
       $(this).unbind("click");

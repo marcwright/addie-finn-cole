@@ -33,6 +33,7 @@
   margin-top: 20px;
   top: 400px;
   position: absolute;
+  color: white;
 }
 
 #startScreen{
@@ -41,6 +42,10 @@
   border: 5px solid black;
   background-color: yellow;
   position: absolute;
+}
+
+.choice {
+  color: white;
 }
 
 .Addie {
