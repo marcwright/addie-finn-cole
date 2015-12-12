@@ -5,7 +5,7 @@
 }
 
 #container {
-  position: relative;
+  position: absolute;
 }
 
 #winnerDiv {
@@ -22,6 +22,52 @@
   margin-top: 10px;
   margin-left: 140px;
   position: absolute;
+  top: 350px;
+}
+
+#playerTurnDiv {
+  width: 326px;
+  height: 50px;
+  font-family: arial;
+  border: 5px dotted black;
+  margin-top: 20px;
+  top: 400px;
+  position: absolute;
+}
+
+#startScreen{
+  width: 450px;
+  height: 150px;
+  border: 5px solid black;
+  background-color: yellow;
+  position: absolute;
+}
+
+#Addie {
+  width: 150px;
+  height: 150px;
+  float: left;  
+  background-color: blue;
+}
+
+#Finnman {
+  width: 150px;
+  height: 150px;
+  float: left;  
+  background-color: green;
+}
+
+#Coleman {
+  width: 150px;
+  height: 150px;
+  float: left;  
+  background-color: orange;
+}
+
+#clickChoice {
+  clear: both;
+  font-family: arial;
+  font-size: 20px;
 }
 
 .cell {

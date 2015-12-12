@@ -1,78 +1,119 @@
-$(function(){
+$(function() {
 
-  var moves, counter, playerTurn;
+  var moves, counter, playerTurn, playerOne, playerTwo, players = [];
 
-  var switchTurn = function(clickedCell){
-    if (playerTurn == 'X'){   
-      playerTurn = 'O';
+  var switchTurn = function(clickedCell) {
+    if (playerTurn == players[0]) {
+      playerTurn = players[1];
+      $('#playerTurnDiv').text(players[0] + "'s Turn!!");
       $('#board').css('border', '10px solid blue');
-      $(clickedCell).addClass('red').text('Addie');      
-    } else {
-      playerTurn = 'X';
+      $(clickedCell).addClass('red').text(playerOne);
+    }
+    else {
+      playerTurn = players[0];
+      $('#playerTurnDiv').text(players[1] + "'s Turn!!");
       $('#board').css('border', '10px solid red');
-      $(clickedCell).addClass('blue').text('Finnman');
-    };  
+      $(clickedCell).addClass('blue').text(playerTwo);
+    };
   }
 
-  var playerClick = function(){
+  var playerClick = function() {
     $(this).unbind("click");
     moves[parseInt($(this).attr('id'))] = playerTurn;
     counter++;
     console.log(counter, moves, playerTurn);
     winConditions();
-    switchTurn($(this));  
-  }; 
+    switchTurn($(this));
+  };
 
-  var resetBoard = function(){
-    moves = ['','','','','','','','',''];
-    playerTurn = 'X';
+  var resetBoard = function() {
+    moves = ['', '', '', '', '', '', '', '', ''];
+    playerTurn = players[0];
     counter = 0;
+    $('#playerTurnDiv').text(players[0] + "'s Turn!!");
     console.log(counter, moves, playerTurn);
     $('.cell').on('click', playerClick).removeClass('red blue').html('');
     console.log("reset the board function");
-    // $('.cell').on('click', playerClick);
+    $('#container').fadeIn(2000);
+    $('#startScreen').fadeOut(2000);
     $('#board').show().css('border', '10px solid green');
     $('#winnerDiv').hide();
   };
 
-  var freezeBoard = function(){
+  var freezeBoard = function() {
     $('#board').fadeOut(2000),
-    $('#winnerDiv').fadeIn(4000)
+      $('#winnerDiv').fadeIn(4000)
       .html('<h1>' + playerTurn + ' is the winner!</h1>')
-      return
-    };
+    return
+  };
 
-  var winConditions = function(){
-    if (moves[0] == playerTurn && moves[1] == playerTurn && moves[2] == playerTurn){
+  var winConditions = function() {
+    if (moves[0] == playerTurn && moves[1] == playerTurn && moves[2] == playerTurn) {
       console.log(playerTurn + ' wins on row 1');
       freezeBoard();
-    } else if (moves[3] == playerTurn && moves[4] == playerTurn && moves[5] == playerTurn){
+    }
+    else if (moves[3] == playerTurn && moves[4] == playerTurn && moves[5] == playerTurn) {
       console.log(playerTurn + ' wins on row 2');
       freezeBoard();
-    } else if (moves[6] == playerTurn && moves[7] == playerTurn && moves[8] == playerTurn){
+    }
+    else if (moves[6] == playerTurn && moves[7] == playerTurn && moves[8] == playerTurn) {
       console.log(playerTurn + ' wins on row 3');
       freezeBoard();
-    } else if (moves[0] == playerTurn && moves[4] == playerTurn && moves[8] == playerTurn || moves[2] == playerTurn && moves[4] == playerTurn && moves[6] == playerTurn){
+    }
+    else if (moves[0] == playerTurn && moves[4] == playerTurn && moves[8] == playerTurn || moves[2] == playerTurn && moves[4] == playerTurn && moves[6] == playerTurn) {
       console.log(playerTurn + ' wins on the diagonal');
       freezeBoard();
-    } else if (moves[0] == playerTurn && moves[3] == playerTurn && moves[6] == playerTurn){
+    }
+    else if (moves[0] == playerTurn && moves[3] == playerTurn && moves[6] == playerTurn) {
       console.log(playerTurn + ' wins in column 1');
       freezeBoard();
-    } else if (moves[1] == playerTurn && moves[4] == playerTurn && moves[7] == playerTurn){
+    }
+    else if (moves[1] == playerTurn && moves[4] == playerTurn && moves[7] == playerTurn) {
       console.log(playerTurn + ' wins in column 2');
       freezeBoard();
-    } else if (moves[2] == playerTurn && moves[5] == playerTurn && moves[8] == playerTurn) {
+    }
+    else if (moves[2] == playerTurn && moves[5] == playerTurn && moves[8] == playerTurn) {
       console.log(playerTurn + ' wins in column 3');
       freezeBoard();
-    } else if (counter == 8) {
+    }
+    else if (counter == 8) {
       console.log("cats!");
       freezeBoard();
-    } else {
+    }
+    else {
       return;
     }
   };
-  
-  // $('.cell').on('click', playerClick);
+
+  function choosePlayerOne() {
+    $('#clickChoice').text("Player one, click on your Avatar!");
+
+    $('.choice').on('click', function(){
+      $(this).unbind("click");
+      players.push($(this).attr('id'));
+      console.log(players);
+      choosePlayerTwo();
+    })
+  };
+
+    function choosePlayerTwo() {
+      $('#clickChoice').text("Player two, click on your Avatar!");
+
+      $('.choice').on('click', function(){
+        $(this).unbind("click");
+        players.push($(this).attr('id'));
+        console.log(players);
+        resetBoard();
+      })
+    };
+
+  function startGame() {
+    $('#container').hide();
+    choosePlayerOne();
+  };
+
   $('#resetButton').on('click', resetBoard);
-  $('#winnerDiv').hide();
+ 
+  startGame();
+
 });

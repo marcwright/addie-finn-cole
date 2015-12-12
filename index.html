@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Addie - Finn - Cole Tic-Tac-Toe</title>
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
+  <div id="startScreen">
+    <div class="choice" id="Addie">ADDIE</div>
+    <div class="choice" id="Finnman">FINNMAN</div>
+    <div class="choice" id="Coleman">COLEMAN</div>
+    <div id="clickChoice">Click on your player!</div>
+  </div>
   <div id="container">
     <div id='board'>
       <div class='cell' id="0"></div>
@@ -22,11 +30,10 @@
       <div class='cell' id="8"></div>
       <div class='clear'></div>
     </div>
-
-    
     <div id="winnerDiv"></div>
+    <div id="playerTurnDiv"></div>
   </div>
-    <button id="resetButton">START</button>
-
+  <button id="resetButton">START</button>
 </body>
+
 </html>
