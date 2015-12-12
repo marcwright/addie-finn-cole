@@ -1,27 +1,40 @@
+#board {
+   border: 10px solid green; 
+   width: 307px;
+   height: 307px;
+}
+
+#container {
+  position: relative;
+}
+
+#winnerDiv {
+  background-color: yellow;
+  border: 10px solid green; 
+  width: 307px;
+  height: 307px;
+  position: absolute;
+  top: 0;
+  left:0;
+}
+
+#resetButton {
+  margin-top: 10px;
+  margin-left: 140px;
+  position: absolute;
+}
+
 .cell {
   width: 100px;
   height: 100px;
   border: 2px solid black;
   float: left;
+  position: relative;
 }
 
 .clear {
   clear: both;
 }
-
-#board {
- border: 10px solid green; 
- max-width: 309px;
- height: 309px;
-}  
-
-/*.clearfix:after {
-  content: ".";
-  visibility: hidden;
-  display: block;
-  height: 0;
-  clear: both;
-}*/
 
 .red {
   background-color: red;
