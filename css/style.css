@@ -43,25 +43,28 @@
   position: absolute;
 }
 
-#Addie {
+.Addie {
   width: 150px;
   height: 150px;
   float: left;  
-  background-color: blue;
+  background-image: url('../img/addie.jpg');
+  background-size: 150px 150px;
 }
 
-#Finnman {
+.Finnman {
   width: 150px;
   height: 150px;
   float: left;  
-  background-color: green;
+  background-image: url('../img/finn.jpg');
+  background-size: 150px 150px;
 }
 
-#Coleman {
+.Coleman {
   width: 150px;
   height: 150px;
   float: left;  
-  background-color: orange;
+  background-image: url('../img/cole.jpg');
+  background-size: 150px 150px;
 }
 
 #clickChoice {

@@ -7,13 +7,13 @@ $(function() {
       playerTurn = players[1];
       $('#playerTurnDiv').text(players[0] + "'s Turn!!");
       $('#board').css('border', '10px solid blue');
-      $(clickedCell).addClass('red').text(playerOne);
+      $(clickedCell).addClass(playerTurn);
     }
     else {
       playerTurn = players[0];
       $('#playerTurnDiv').text(players[1] + "'s Turn!!");
       $('#board').css('border', '10px solid red');
-      $(clickedCell).addClass('blue').text(playerTwo);
+      $(clickedCell).addClass(playerTurn);
     };
   }
 
