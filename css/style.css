@@ -1,0 +1,32 @@
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
+#board {
+ border: 10px solid green; 
+ max-width: 309px;
+ height: 309px;
+}  
+
+/*.clearfix:after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}*/
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
