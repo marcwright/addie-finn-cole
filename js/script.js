@@ -6,14 +6,14 @@ $(function() {
     if (playerTurn == players[0]) {
       playerTurn = players[1];
       $('#playerTurnDiv').text(players[0] + "'s Turn!!");
-      $('#board').css('border', '10px solid blue');
-      $(clickedCell).addClass(playerTurn).css('background-size', '100%');
+      // $('#board').css('border', '10px solid blue');
+      $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
     }
     else {
       playerTurn = players[0];
       $('#playerTurnDiv').text(players[1] + "'s Turn!!");
-      $('#board').css('border', '10px solid red');
-      $(clickedCell).addClass(playerTurn).css('background-size', '100%');
+      // $('#board').css('border', '10px solid red');
+      $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
     };
   }
 
@@ -32,12 +32,12 @@ $(function() {
     counter = 0;
     $('#playerTurnDiv').text(players[0] + "'s Turn!!");
     console.log(counter, moves, playerTurn);
-    $('.cell').addClass('animated infinite pulse')
+    $('.cell').addClass('animated pulse')
       .on('click', playerClick).removeClass('Finnman Addie Coleman');
     console.log("reset the board function");
     $('#container').fadeIn(2000);
     $('#startScreen').fadeOut(2000);
-    $('#board').show().css('border', '10px solid green');
+    // $('#board').show().css('border', '10px solid green');
     $('#winnerDiv').hide();
   };
 
@@ -104,11 +104,12 @@ $(function() {
 
     $('#clickChoice').empty().delay(2000).text("Player #1, click your avatar!");
     $('.choice').on('click', function(){
-      $(this).unbind("click");
-      $(this).append('<p>Player #1<br>' + this.id + '!</p>');
+      $(this).off("click").animate({"opacity": "0.5"});
+      $(this).append('<p>Player #1 is<br>' + this.id + '!</p>');
       players.push($(this).attr('id'));
       console.log(players);
-      choosePlayerTwo();
+      $(this) = '';
+      return choosePlayerTwo();
     })
   };
 
@@ -116,11 +117,12 @@ $(function() {
       $('#clickChoice').text("Player #2, click on your avatar!");
 
       $('.choice').on('click', function(){
-        $(this).unbind("click");
-        $(this).append('<p>Player #1<br>' + this.id + '!</p>');
+        $(this).off("click").animate({"opacity": "0.5"});
+        console.log(this.id)
+        $(this).append('<p>Player #2 is<br>' + this.id + '!</p>');
         $('#clickChoice').text("Let's Play!!").removeClass().addClass('animated bounceOut');
-
-        players.push($(this).attr('id'));
+        p2 = $(this).attr('id');
+        players.push(p2);
         console.log(players);
         setTimeout(function(){
           resetBoard();}, 2000);
