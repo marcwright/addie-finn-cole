@@ -18,7 +18,7 @@ $(function() {
   }
 
   var playerClick = function() {
-    $(this).unbind("click");
+    $(this).unbind("click").removeClass('animated infinite pulse');
     moves[parseInt($(this).attr('id'))] = playerTurn;
     counter++;
     console.log(counter, moves, playerTurn);
@@ -32,7 +32,8 @@ $(function() {
     counter = 0;
     $('#playerTurnDiv').text(players[0] + "'s Turn!!");
     console.log(counter, moves, playerTurn);
-    $('.cell').on('click', playerClick).removeClass('Finnman Addie Coleman');
+    $('.cell').addClass('animated infinite pulse')
+      .on('click', playerClick).removeClass('Finnman Addie Coleman');
     console.log("reset the board function");
     $('#container').fadeIn(2000);
     $('#startScreen').fadeOut(2000);
@@ -41,7 +42,7 @@ $(function() {
   };
 
   var freezeBoard = function() {
-    $('#board').fadeOut(2000),
+    $('#board').addClass('animated hinge'),
       $('#winnerDiv').fadeIn(4000).addClass(playerTurn).css('background-size', '100%')
       .html('<h1>' + playerTurn + ' is the winner!</h1>')
     return
