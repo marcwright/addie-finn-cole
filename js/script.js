@@ -86,45 +86,62 @@ $(function() {
     }
   };
 
-  function choosePlayerOne() {
-    $('#clickChoice').typed({
-        strings: ["Welcome to Tic-Tac-Toe ^2000 <br> With Addie, Finn and Cole!", "Player 1, Pick your Avatar"],
-        typeSpeed: 15,
-        showCursor: false
-      });
-
-    $('.choice').show(8000).addClass('animated bounceInUp')
-
-
-
-    // $('.choice').show(5000).on('hover', function(){
-    //   $(this).addClass('animated pulse');
+  var choosePlayerOne = function() {
+    // $('#clickChoice').typed({
+    //   strings: ["Welcome to Tic-Tac-Toe ^2000 <br> With Addie, Finn and Cole!"],
+    //   typeSpeed: 10,
+    //   showCursor: false,
+    //   callback: function() {
+    //     $('.choice').show().addClass('animated bounceInUp');
+    //   }
     // });
 
+    // $('#clickChoice').typed({
+    //     strings: ["Player #1 choose your avatar!"],
+    //     typeSpeed: 5,
+    //     showCursor: false
+    //   });    
+
+    $('#clickChoice').empty().delay(2000).text("Player #1, click your avatar!");
     $('.choice').on('click', function(){
       $(this).unbind("click");
+      $(this).append('<p>Player #1<br>' + this.id + '!</p>');
       players.push($(this).attr('id'));
       console.log(players);
       choosePlayerTwo();
     })
   };
 
-    function choosePlayerTwo() {     
-
-      $('#clickChoice').text("Player two, click on your Avatar!");
+    function choosePlayerTwo() {
+      $('#clickChoice').text("Player #2, click on your avatar!");
 
       $('.choice').on('click', function(){
         $(this).unbind("click");
+        $(this).append('<p>Player #1<br>' + this.id + '!</p>');
+        $('#clickChoice').text("Let's Play!!").removeClass().addClass('animated bounceOut');
+
         players.push($(this).attr('id'));
         console.log(players);
-        resetBoard();
+        setTimeout(function(){
+          resetBoard();}, 2000);
       })
     };
 
   function startGame() {
     $('#container').hide();
     $('.choice').hide();
-    choosePlayerOne();
+    $('#clickChoice').typed({
+      strings: ["Welcome to Tic-Tac-Toe ^2000 <br> With Addie, Finn and Cole!"],
+      typeSpeed: 5,
+      showCursor: false,
+      callback: function() {
+        $('.choice').show().addClass('animated bounceInUp');
+        $('#clickChoice').addClass('animated flash');
+        setTimeout(function(){
+          choosePlayerOne();}, 2000);
+      }
+    });
+    
   };
 
   $('#resetButton').on('click', resetBoard);

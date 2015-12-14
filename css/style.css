@@ -112,6 +112,7 @@ body {
   clear: both;
   padding-top: 25px;
   text-align: center;
+  height: 100px;
 }
 
 .cell {
