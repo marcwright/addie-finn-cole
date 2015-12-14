@@ -44,11 +44,12 @@ body {
 }
 
 #startScreen{
-  width: 450px;
-  height: 150px;
-  border: 5px solid black;
-  background-color: yellow;
-  position: absolute;
+  width: 550px;
+  height: 200px;
+  /*border: 5px solid black;*/
+  /*background-color: yellow;*/
+  position: relative;
+  /*margin-left: 30%;*/
 }
 
 .choice {
@@ -58,19 +59,20 @@ body {
   float: left;  
   background-size: 150px 150px;
   text-align: center;
+  margin: 10px;
   
 }
 
 .Addie {  
-  background-image: url('../img/addie.jpg');
+  background-image: url('../img/addie.png');
 }
 
 .Finnman {
-  background-image: url('../img/finn.jpg');
+  background-image: url('../img/finn.png');
 }
 
 .Coleman {
-  background-image: url('../img/cole.jpg');
+  background-image: url('../img/cole.png');
 }
 
 #clickChoice {

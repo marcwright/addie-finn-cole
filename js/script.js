@@ -93,6 +93,8 @@ $(function() {
         showCursor: false
       });
 
+    $('.choice').addClass('animated infinite swing')
+
 
 
     $('.choice').show(5000).on('hover', function(){
