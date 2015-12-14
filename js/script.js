@@ -93,13 +93,13 @@ $(function() {
         showCursor: false
       });
 
-    $('.choice').addClass('animated infinite swing')
+    $('.choice').show(8000).addClass('animated bounceInUp')
 
 
 
-    $('.choice').show(5000).on('hover', function(){
-      $(this).addClass('animated pulse');
-    });
+    // $('.choice').show(5000).on('hover', function(){
+    //   $(this).addClass('animated pulse');
+    // });
 
     $('.choice').on('click', function(){
       $(this).unbind("click");
@@ -123,6 +123,7 @@ $(function() {
 
   function startGame() {
     $('#container').hide();
+    $('.choice').hide();
     choosePlayerOne();
   };
 
