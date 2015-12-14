@@ -1,3 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+
+body {
+  font-family: 'Indie Flower', cursive;
+  font-size: 30px;
+}
+
 #board {
    border: 10px solid green; 
    width: 307px;
@@ -46,36 +53,30 @@
 
 .choice {
   color: white;
-}
-
-.Addie {
   width: 150px;
   height: 150px;
   float: left;  
-  background-image: url('../img/addie.jpg');
   background-size: 150px 150px;
+  text-align: center;
+  
+}
+
+.Addie {  
+  background-image: url('../img/addie.jpg');
 }
 
 .Finnman {
-  width: 150px;
-  height: 150px;
-  float: left;  
   background-image: url('../img/finn.jpg');
-  background-size: 150px 150px;
 }
 
 .Coleman {
-  width: 150px;
-  height: 150px;
-  float: left;  
   background-image: url('../img/cole.jpg');
-  background-size: 150px 150px;
 }
 
 #clickChoice {
   clear: both;
-  font-family: arial;
-  font-size: 20px;
+  padding-top: 25px;
+  text-align: center;
 }
 
 .cell {

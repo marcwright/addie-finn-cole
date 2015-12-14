@@ -87,9 +87,15 @@ $(function() {
   };
 
   function choosePlayerOne() {
-    $('#clickChoice').text("Player one, click on your Avatar!");
+    $('#clickChoice').typed({
+        strings: ["Welcome to Tic-Tac-Toe ^2000 <br> With Addie, Finn and Cole!", "Player 1, Pick your Avatar"],
+        typeSpeed: 15,
+        showCursor: false
+      });
 
-    $('.choice').on('hover', function(){
+
+
+    $('.choice').show(5000).on('hover', function(){
       $(this).addClass('animated pulse');
     });
 
@@ -101,7 +107,8 @@ $(function() {
     })
   };
 
-    function choosePlayerTwo() {
+    function choosePlayerTwo() {     
+
       $('#clickChoice').text("Player two, click on your Avatar!");
 
       $('.choice').on('click', function(){
