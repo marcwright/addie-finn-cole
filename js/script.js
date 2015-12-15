@@ -26,53 +26,35 @@ $(function() {
     $('#clickChoice').empty().delay(2000).text("Player #1, click your avatar!");
     
     $('.choice').on('click', function(){
-      // $(this).off("click").html("<div class='animated wobble' style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; color:white'>" + this.id + ' Plaer 1</div>');
-      // $('#this.id').prepend('<div style="border-top:50px">Player #1 is<br>' + this.id + '!</div>');
       players.push($(this).attr('id'));
       $('#clickChoice').text("Player #2, click on your avatar!");
       $(this).prepend("<div class='animated wobble' style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; color:white'>Player #" + players.length + ' is<br>' + this.id + '!</div>');
-      // .prepend('<p>Player #' + players.length + ' is<br>' + this.id + '!</p>');
       console.log(players);
 
-      if (players.length == 2){
+      //if Diesel (computer is chosen)
+      if (players.length == 2 && players.indexOf('Diesel') > -1){
+        $('#clickChoice').text(players[0] + " vs. " + players[1] + " You're playing the computer!!");
+        setTimeout(function(){
+          $('#clickChoice').addClass('animated bounceOut');
+          gamePlay();
+        }, 2000);
+      } else if(players.length == 2){
+       //if Diesel is not chosen 
         $('#clickChoice').text(players[0] + " vs. " + players[1] + " Let's Play!!");
         setTimeout(function(){
           $('#clickChoice').addClass('animated bounceOut');
-          resetBoard();
+          gamePlay();
         }, 2000);
       }
     })
   };
 
-  var switchTurn = function(clickedCell) {
-    if (playerTurn == players[0]) {
-      $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
-      playerTurn = players[1];
-      $('#playerTurnDiv').text(players[1] + "'s Turn!!");
-      // $('#board').css('border', '10px solid blue');
-    }
-    else {
-      $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
-      playerTurn = players[0];
-      $('#playerTurnDiv').text(players[0] + "'s Turn!!");
-      // $('#board').css('border', '10px solid red');
-    };
-  }
 
-  var playerClick = function() {
-    $(this).off("click").css('background-color', 'white');
-    moves[parseInt($(this).attr('id'))] = playerTurn;
-    counter++;
-    console.log(counter, moves, playerTurn);
 
-    if (counter > 4){ 
-      winConditions();
-    }
 
-    switchTurn($(this));
-  };
 
-  var resetBoard = function() {
+  //game play logic
+  var gamePlay = function() {
     moves = ['', '', '', '', '', '', '', '', ''];
     playerTurn = players[0];
     counter = 0;
@@ -86,11 +68,41 @@ $(function() {
     $('#winnerDiv').hide();
   };
 
+  //when a player click on a game cell
+  var playerClick = function() {
+    $(this).off("click").css('background-color', 'white');
+    moves[parseInt($(this).attr('id'))] = playerTurn;
+    counter++;
+    console.log(counter, moves, playerTurn);
+
+    if (counter > 4){ 
+      winConditions();
+    }
+
+    switchTurn($(this));
+  };
+
+  //switches turns
+  var switchTurn = function(clickedCell) {
+    if (playerTurn == players[0]) {
+      $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
+      playerTurn = players[1];
+      $('#playerTurnDiv').text(players[1] + "'s Turn!!");
+      // $('#board').css('border', '10px solid blue');
+    }
+    else {
+      $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
+      playerTurn = players[0];
+      $('#playerTurnDiv').text(players[0] + "'s Turn!!");
+      // $('#board').css('border', '10px solid red');
+    };
+  };
+
   var winnerIs = function() {
     $('.' + playerTurn).addClass('animated infinite flash'),
     $('#board').fadeOut(4000),
       $('#winnerDiv').delay(2000).fadeIn(3000).addClass(playerTurn).css('background-size', 'contain')
-      .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px;'><h1 class='animated wobble'>" + playerTurn + ' wins!</h1></div>');
+      .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; margin-top: 200px'><h1 class='animated wobble'>" + playerTurn + ' wins!</h1></div>');
       $('#playerTurnDiv').remove();
       // $('body').prepend()
       $('.resetButton').show().on('click', function(){
@@ -135,8 +147,6 @@ $(function() {
       return;
     }
   };
-
-
 
  
   startGame();
