@@ -110,7 +110,9 @@ body {
 }
 
 #butt {
-  left-margin: 35%;
+  left-margin: 400px;
+  position: absolute;
+  margin-top: 525px;
 }
 
 .btn {
@@ -139,4 +141,9 @@ body {
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
+}
+
+a {
+  cursor:default;
+  margin-left: 250px;
 }

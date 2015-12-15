@@ -86,8 +86,9 @@ $(function() {
   };
 
   var winnerIs = function() {
-    $('#board').addClass('animated hinge'),
-      $('#winnerDiv').fadeIn(4000).addClass(playerTurn).css('background-size', 'contain')
+    $('.' + playerTurn).addClass('animated infinite flash'),
+    $('#board').fadeOut(4000),
+      $('#winnerDiv').delay(2000).fadeIn(3000).addClass(playerTurn).css('background-size', 'contain')
       .html("<h1 class='animated wobble'>" + playerTurn + ' wins!</h1>');
       $('#playerTurnDiv').remove();
       // $('body').prepend()
