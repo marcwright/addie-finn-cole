@@ -4,25 +4,29 @@ $(function() {
 
   var switchTurn = function(clickedCell) {
     if (playerTurn == players[0]) {
-      playerTurn = players[1];
-      $('#playerTurnDiv').text(players[0] + "'s Turn!!");
-      // $('#board').css('border', '10px solid blue');
       $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
+      playerTurn = players[1];
+      $('#playerTurnDiv').text(players[1] + "'s Turn!!");
+      // $('#board').css('border', '10px solid blue');
     }
     else {
-      playerTurn = players[0];
-      $('#playerTurnDiv').text(players[1] + "'s Turn!!");
-      // $('#board').css('border', '10px solid red');
       $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
+      playerTurn = players[0];
+      $('#playerTurnDiv').text(players[0] + "'s Turn!!");
+      // $('#board').css('border', '10px solid red');
     };
   }
 
   var playerClick = function() {
-    $(this).unbind("click").removeClass('animated infinite pulse');
+    $(this).off("click");
     moves[parseInt($(this).attr('id'))] = playerTurn;
     counter++;
     console.log(counter, moves, playerTurn);
-    winConditions();
+
+    if (counter > 4){ 
+      winConditions();
+    }
+
     switchTurn($(this));
   };
 
@@ -34,18 +38,19 @@ $(function() {
     console.log(counter, moves, playerTurn);
     $('.cell').addClass('animated pulse')
       .on('click', playerClick).removeClass('Finnman Addie Coleman');
-    console.log("reset the board function");
+    // console.log("reset the board function");
     $('#container').fadeIn(2000);
     $('#startScreen').fadeOut(2000);
-    // $('#board').show().css('border', '10px solid green');
     $('#winnerDiv').hide();
   };
 
   var freezeBoard = function() {
     $('#board').addClass('animated hinge'),
       $('#winnerDiv').fadeIn(4000).addClass(playerTurn).css('background-size', '100%')
-      .html('<h1>' + playerTurn + ' is the winner!</h1>')
-    return
+      .html("<h1 class='animated wobble'>" + playerTurn + ' wins!</h1>');
+      $('#playerTurnDiv').remove();
+      // $('.resetButton').show().on('click', startGame());
+    
   };
 
   var winConditions = function() {
@@ -87,54 +92,32 @@ $(function() {
   };
 
   var choosePlayerOne = function() {
-    // $('#clickChoice').typed({
-    //   strings: ["Welcome to Tic-Tac-Toe ^2000 <br> With Addie, Finn and Cole!"],
-    //   typeSpeed: 10,
-    //   showCursor: false,
-    //   callback: function() {
-    //     $('.choice').show().addClass('animated bounceInUp');
-    //   }
-    // });
-
-    // $('#clickChoice').typed({
-    //     strings: ["Player #1 choose your avatar!"],
-    //     typeSpeed: 5,
-    //     showCursor: false
-    //   });    
-
     $('#clickChoice').empty().delay(2000).text("Player #1, click your avatar!");
+    
     $('.choice').on('click', function(){
       $(this).off("click").animate({"opacity": "0.5"});
-      $(this).append('<p>Player #1 is<br>' + this.id + '!</p>');
+      $('#this.id').append('<p>Player #1 is<br>' + this.id + '!</p>');
       players.push($(this).attr('id'));
+      $('#clickChoice').text("Player #2, click on your avatar!");
+      $(this).append('<p>Player #' + players.length + ' is<br>' + this.id + '!</p>');
       console.log(players);
-      $(this) = '';
-      return choosePlayerTwo();
+
+      if (players.length == 2){
+        $('#clickChoice').text(players[0] + " vs. " + players[1] + " Let's Play!!");
+        setTimeout(function(){
+          $('#clickChoice').addClass('animated bounceOut');
+          resetBoard();
+        }, 2000);
+      }
     })
   };
-
-    function choosePlayerTwo() {
-      $('#clickChoice').text("Player #2, click on your avatar!");
-
-      $('.choice').on('click', function(){
-        $(this).off("click").animate({"opacity": "0.5"});
-        console.log(this.id)
-        $(this).append('<p>Player #2 is<br>' + this.id + '!</p>');
-        $('#clickChoice').text("Let's Play!!").removeClass().addClass('animated bounceOut');
-        p2 = $(this).attr('id');
-        players.push(p2);
-        console.log(players);
-        setTimeout(function(){
-          resetBoard();}, 2000);
-      })
-    };
 
   function startGame() {
     $('#container').hide();
     $('.choice').hide();
     $('#clickChoice').typed({
-      strings: ["Welcome to Tic-Tac-Toe ^2000 <br> With Addie, Finn and Cole!"],
-      typeSpeed: 5,
+      strings: ["Welcome to Tic-Tac-Toe ^1000 <br> With Addie, Finn and Cole!"],
+      typeSpeed: 1,
       showCursor: false,
       callback: function() {
         $('.choice').show().addClass('animated bounceInUp');
@@ -146,7 +129,7 @@ $(function() {
     
   };
 
-  $('#resetButton').on('click', resetBoard);
+  $('.resetButton').hide();
  
   startGame();
 
