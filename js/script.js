@@ -18,7 +18,7 @@ $(function() {
   }
 
   var playerClick = function() {
-    $(this).off("click");
+    $(this).off("click").css('background-color', 'white');
     moves[parseInt($(this).attr('id'))] = playerTurn;
     counter++;
     console.log(counter, moves, playerTurn);
@@ -46,11 +46,13 @@ $(function() {
 
   var freezeBoard = function() {
     $('#board').addClass('animated hinge'),
-      $('#winnerDiv').fadeIn(4000).addClass(playerTurn).css('background-size', '100%')
+      $('#winnerDiv').fadeIn(4000).addClass(playerTurn).css('background-size', 'contain')
       .html("<h1 class='animated wobble'>" + playerTurn + ' wins!</h1>');
       $('#playerTurnDiv').remove();
-      // $('.resetButton').show().on('click', startGame());
-    
+      // $('body').prepend()
+      $('.resetButton').show().on('click', function(){
+        window.location.reload();
+      });    
   };
 
   var winConditions = function() {
@@ -96,10 +98,10 @@ $(function() {
     
     $('.choice').on('click', function(){
       $(this).off("click").animate({"opacity": "0.5"});
-      $('#this.id').append('<p>Player #1 is<br>' + this.id + '!</p>');
+      $('#this.id').prepend('<div style="border-top:50px">Player #1 is<br>' + this.id + '!</div>');
       players.push($(this).attr('id'));
       $('#clickChoice').text("Player #2, click on your avatar!");
-      $(this).append('<p>Player #' + players.length + ' is<br>' + this.id + '!</p>');
+      $(this).prepend('<p>Player #' + players.length + ' is<br>' + this.id + '!</p>');
       console.log(players);
 
       if (players.length == 2){
@@ -112,7 +114,9 @@ $(function() {
     })
   };
 
-  function startGame() {
+  var startGame = function() {
+    $('.resetButton').hide();
+    $("#appBody").show();
     $('#container').hide();
     $('.choice').hide();
     $('#clickChoice').typed({
@@ -125,11 +129,9 @@ $(function() {
         setTimeout(function(){
           choosePlayerOne();}, 2000);
       }
-    });
-    
+    });    
   };
 
-  $('.resetButton').hide();
  
   startGame();
 
