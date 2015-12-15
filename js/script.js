@@ -1,6 +1,6 @@
 $(function() {
 
-  var moves, counter, playerTurn, playerOne, playerTwo, players = [], dieselChoice, dieselNum;
+  var moves, counter, playerTurn, playerOne, playerTwo, players = [], dieselChoice, dieselNum = 0, winDirection;
   
 //Starts the game. It's called at the bottom of the script.
   var startGame = function() {
@@ -67,8 +67,8 @@ $(function() {
     $('#winnerDiv').hide();
   };
 
-  //ai logic
-  var ai = function() {
+  //when a player clicks a cell
+  var playerClick = function() {
     $(this).off("click").css('background-color', 'white');
     moves[parseInt($(this).attr('id'))] = playerTurn;
     counter++;
@@ -80,56 +80,64 @@ $(function() {
     switchTurn($(this));
   };
 
-  //when a player click on a game cell
-  var playerClick = function() { 
+  //working on AI logic here
+  // var playerClick = function() { 
 
-    if (playerTurn == 'Diesel') {
-      dieselNum = Math.floor(Math.random()*10); //getting a random number to pick a cell
-        if (moves[dieselNum] == '') {
-          dieselChoice = $('#' + dieselNum);  //grabbing the cell with the id of number diesel
-          moves[dieselNum] == 'Diesel';
-        } else {
-          dieselNum = Math.floor(Math.random()*10);
-          dieselChoice = $('#' + dieselNum);  //grabbing the cell with the id of number diesel
-          moves[dieselNum] == 'Diesel';
-        };
+  //   if (playerTurn == 'Diesel') {
+  //     dieselNum = Math.floor(Math.random()*10); //getting a random number to pick a cell
+  //       if (moves[dieselNum] === '') {
+  //         dieselChoice = $('#' + dieselNum);  //grabbing the cell with the id of number diesel
+  //         moves[dieselNum] = 'Diesel';
+  //         dieselChoice.off("click").css('background-color', 'white'); //turning off click on that cell
+  //         counter++;
+  //         console.log(counter, moves, playerTurn, dieselChoice, "Disel Num = " + dieselNum);
+  //         switchTurn(dieselChoice);
+  //       } else {
+  //         console.log("Diesel Else line 93");
+  //         dieselNum = Math.floor(Math.random()*10);
+  //         dieselChoice = $('#' + dieselNum);  //grabbing the cell with the id of number diesel
+  //         moves[dieselNum] = 'Diesel';
+  //         dieselNum = 0;
+  //         dieselChoice.off("click").css('background-color', 'white'); //turning off click on that cell
+  //         counter++;
+  //         console.log(counter, moves, playerTurn, dieselChoice, "Disel Num = " + dieselNum);
+  //         switchTurn(dieselChoice);
+  //       };
 
-      dieselChoice.off("click").css('background-color', 'white'); //turning off click on that cell
-      counter++;
-      console.log(counter, moves, playerTurn, dieselChoice);
-      switchTurn(dieselChoice);
 
-    } else {
+  //   } else {
+  //     console.log('line 109');
+  //     $('.cell').on('click', function(){
+  //       $(this).off("click").css('background-color', 'white');
+  //       moves[parseInt($(this).attr('id'))] = playerTurn;
+  //       console.log(counter, moves, playerTurn);
+  //       counter++;
+  //       switchTurn($(this));
+  //     });
+  //   }
+  //     // $(this).off("click").css('background-color', 'white');
+  //     // moves[parseInt($(this).attr('id'))] = playerTurn;
+  //     // counter++;
+  //     // console.log(counter, moves, playerTurn);
 
-      $(this).off("click").css('background-color', 'white');
-      moves[parseInt($(this).attr('id'))] = playerTurn;
-      counter++;
-      console.log(counter, moves, playerTurn);
+  //     // if (playerTurn == 'Diesel'){
+  //     //   diesel = Math.floor(Math.random()*10);
+  //     //   moves[diesel] = "Diesel";
+  //     //   console.log('line 91 + ' + diesel);
+  //     //   dieselChoice = $('#' + diesel);
+  //     //   dieselChoice.off("click").css('background-color', 'white');
+  //     //   console.log("line 96" + counter, moves, playerTurn);
+  //     //   console.log(dieselChoice);
+  //     //   switchTurn(dieselChoice);
+  //     // } else {
+  //     //   switchTurn($(this));
+  //     //   console.log($(this));
+  //     // }
 
-    }
-      // $(this).off("click").css('background-color', 'white');
-      // moves[parseInt($(this).attr('id'))] = playerTurn;
-      // counter++;
-      // console.log(counter, moves, playerTurn);
-
-      // if (playerTurn == 'Diesel'){
-      //   diesel = Math.floor(Math.random()*10);
-      //   moves[diesel] = "Diesel";
-      //   console.log('line 91 + ' + diesel);
-      //   dieselChoice = $('#' + diesel);
-      //   dieselChoice.off("click").css('background-color', 'white');
-      //   console.log("line 96" + counter, moves, playerTurn);
-      //   console.log(dieselChoice);
-      //   switchTurn(dieselChoice);
-      // } else {
-      //   switchTurn($(this));
-      //   console.log($(this));
-      // }
-
-      if (counter > 4){ 
-        winConditions();
-      }
-  };
+  //     if (counter > 4){ 
+  //       winConditions();
+  //     }
+  // };
 
   //switches turns
   var switchTurn = function(clickedCell) {
@@ -148,9 +156,9 @@ $(function() {
     $('.' + playerTurn).addClass('animated infinite flash'),
     $('#board').fadeOut(4000),
       $('#winnerDiv').delay(2000).fadeIn(3000).addClass(playerTurn).css('background-size', 'contain')
-      .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; margin-top: 200px'><h1 class='animated wobble'>" + playerTurn + ' wins!</h1></div>');
+      .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; margin-top: 200px'><h1 class='animated wobble'>" + playerTurn + winDirection + '!</h1></div>');
       $('#playerTurnDiv').remove();
-      // $('body').prepend()
+      console.log(winDirection);
       $('.resetButton').show().on('click', function(){
         window.location.reload();
       });    
@@ -158,31 +166,31 @@ $(function() {
 
   var winConditions = function() {
     if (moves[0] == playerTurn && moves[1] == playerTurn && moves[2] == playerTurn) {
-      console.log(playerTurn + ' wins on row 1');
+      winDirection = ' wins on row 1';
       winnerIs();
     }
     else if (moves[3] == playerTurn && moves[4] == playerTurn && moves[5] == playerTurn) {
-      console.log(playerTurn + ' wins on row 2');
+      winDirection = ' wins on row 2';
       winnerIs();
     }
     else if (moves[6] == playerTurn && moves[7] == playerTurn && moves[8] == playerTurn) {
-      console.log(playerTurn + ' wins on row 3');
+      winDirection = ' wins on row 3';
       winnerIs();
     }
     else if (moves[0] == playerTurn && moves[4] == playerTurn && moves[8] == playerTurn || moves[2] == playerTurn && moves[4] == playerTurn && moves[6] == playerTurn) {
-      console.log(playerTurn + ' wins on the diagonal');
+      winDirection = ' wins on the diagonal';
       winnerIs();
     }
     else if (moves[0] == playerTurn && moves[3] == playerTurn && moves[6] == playerTurn) {
-      console.log(playerTurn + ' wins in column 1');
+      winDirection = ' wins in column 1';
       winnerIs();
     }
     else if (moves[1] == playerTurn && moves[4] == playerTurn && moves[7] == playerTurn) {
-      console.log(playerTurn + ' wins in column 2');
+      winDirection = ' wins in column 2';
       winnerIs();
     }
     else if (moves[2] == playerTurn && moves[5] == playerTurn && moves[8] == playerTurn) {
-      console.log(playerTurn + ' wins in column 3');
+      winDirection = ' wins in column 3';
       winnerIs();
     }
     else if (counter == 8) {
