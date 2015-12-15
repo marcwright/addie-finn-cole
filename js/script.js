@@ -13,7 +13,7 @@ $(function() {
       typeSpeed: 1,
       showCursor: false,
       callback: function() {
-        $('.choice').show().addClass('animated bounceInUp');
+        $('.choice').show().addClass('animated bounceInUp').removeClass('animated bounceInUp');
         $('#clickChoice').addClass('animated flash');
         setTimeout(function(){
           choosePlayerOne();}, 2000);
@@ -26,11 +26,12 @@ $(function() {
     $('#clickChoice').empty().delay(2000).text("Player #1, click your avatar!");
     
     $('.choice').on('click', function(){
-      $(this).off("click").animate({"opacity": "0.5"});
-      $('#this.id').prepend('<div style="border-top:50px">Player #1 is<br>' + this.id + '!</div>');
+      // $(this).off("click").html("<div class='animated wobble' style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; color:white'>" + this.id + ' Plaer 1</div>');
+      // $('#this.id').prepend('<div style="border-top:50px">Player #1 is<br>' + this.id + '!</div>');
       players.push($(this).attr('id'));
       $('#clickChoice').text("Player #2, click on your avatar!");
-      $(this).prepend('<p>Player #' + players.length + ' is<br>' + this.id + '!</p>');
+      $(this).prepend("<div class='animated wobble' style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; color:white'>Player #" + players.length + ' is<br>' + this.id + '!</div>');
+      // .prepend('<p>Player #' + players.length + ' is<br>' + this.id + '!</p>');
       console.log(players);
 
       if (players.length == 2){
@@ -89,7 +90,7 @@ $(function() {
     $('.' + playerTurn).addClass('animated infinite flash'),
     $('#board').fadeOut(4000),
       $('#winnerDiv').delay(2000).fadeIn(3000).addClass(playerTurn).css('background-size', 'contain')
-      .html("<h1 class='animated wobble'>" + playerTurn + ' wins!</h1>');
+      .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px;'><h1 class='animated wobble'>" + playerTurn + ' wins!</h1></div>');
       $('#playerTurnDiv').remove();
       // $('body').prepend()
       $('.resetButton').show().on('click', function(){

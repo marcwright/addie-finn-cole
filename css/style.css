@@ -31,6 +31,7 @@ body {
   position: absolute;
   top: 0;
   left:50px;
+  color: white;
 
   /*margin: auto;
   width: 60%;*/
@@ -83,6 +84,24 @@ body {
 
 .Coleman {
   background-image: url('../img/cole.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.Katy {  
+  background-image: url('../img/katy.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.Matt {
+  background-image: url('../img/matt.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.Diesel {
+  background-image: url('../img/diesel.png');
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -147,3 +166,38 @@ a {
   cursor:default;
   margin-left: 250px;
 }
+
+/*@-webkit-keyframes pulse {
+    0% { -webkit-transform: scale(1) rotate(45deg);}    
+    50% {-webkit-transform: scale(1.6) rotate(45deg);}
+    100% {-webkit-transform: scale(1) rotate(45deg);}
+}*/
+/*.lotus {padding: 300px 100px;}*/
+/*.petal {
+    background: #ff3399;
+    -webkit-border-radius: 165px 10px 165px 10px;
+    -moz-border-radius: 165px 10px 165px 10px;
+    border-radius: 165px 10px 165px 10px;
+    height: 200px;
+    opacity:0.84;
+    position: absolute;
+    -webkit-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+    width: 200px;
+}*/
+.detox {
+/*background: #ff3399;*/
+/*-webkit-transform: rotate(45deg);*/
+}
+
+.detox:hover {
+    opacity:1;
+    z-index:+1;
+    -webkit-animation: pulse 1s infinite;
+}
+
+
+
+
+
+
