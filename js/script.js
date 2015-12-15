@@ -4,6 +4,10 @@ $(function() {
   
 //Starts the game. It's called at the bottom of the script.
   var startGame = function() {
+    // $('body').on('click', function(){
+
+    //   $(this).append('<embed src="http://www.freesfx.co.uk/rx2/mp3s/9/11105_1393961054.mp3" autostart="true" width="1" height="1" id="LegacySound" enablejavascript="true">');
+    // });
     $('.resetButton').hide();
     $("#appBody").show();
     $('#container').hide();
@@ -167,41 +171,35 @@ $(function() {
   var winConditions = function() {
     if (moves[0] == playerTurn && moves[1] == playerTurn && moves[2] == playerTurn) {
       winDirection = ' wins on row 1';
-      winnerIs();
     }
     else if (moves[3] == playerTurn && moves[4] == playerTurn && moves[5] == playerTurn) {
       winDirection = ' wins on row 2';
-      winnerIs();
     }
     else if (moves[6] == playerTurn && moves[7] == playerTurn && moves[8] == playerTurn) {
       winDirection = ' wins on row 3';
-      winnerIs();
     }
     else if (moves[0] == playerTurn && moves[4] == playerTurn && moves[8] == playerTurn || moves[2] == playerTurn && moves[4] == playerTurn && moves[6] == playerTurn) {
       winDirection = ' wins on the diagonal';
-      winnerIs();
     }
     else if (moves[0] == playerTurn && moves[3] == playerTurn && moves[6] == playerTurn) {
       winDirection = ' wins in column 1';
-      winnerIs();
     }
     else if (moves[1] == playerTurn && moves[4] == playerTurn && moves[7] == playerTurn) {
       winDirection = ' wins in column 2';
-      winnerIs();
     }
     else if (moves[2] == playerTurn && moves[5] == playerTurn && moves[8] == playerTurn) {
       winDirection = ' wins in column 3';
-      winnerIs();
     }
-    else if (counter == 8) {
+    else if (counter == 9) {
+      winDirection = ' Game... No one wins';
+      playerTurn = 'Cat';
       console.log("cats!");
-      winnerIs();
     }
     else {
       return;
     }
+    winnerIs();
   };
-
  
   startGame();
 

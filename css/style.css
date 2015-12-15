@@ -106,6 +106,12 @@ body {
   background-repeat: no-repeat;
 }
 
+.Cat {
+  background-image: url('../img/cat.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 #clickChoice {
   clear: both;
   padding-top: 25px;
