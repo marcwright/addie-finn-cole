@@ -1,6 +1,6 @@
 // $(function() {
 
-  var moves, counter, playerTurn, playerOne, playerTwo, players = [], dieselChoice, dieselNum = 0, winDirection;
+  var moves, counter, playerTurn, playerOne, playerTwo, players = [], dieselChoice, dieselNum, winDirection;
   
 //Starts the game. It's called at the bottom of the script.
   var startGame = function() {
@@ -52,7 +52,7 @@
         $('#clickChoice').text(players[0] + " vs. " + players[1] + " You're playing the computer!!");
         setTimeout(function(){
           $('#clickChoice').addClass('animated bounceOut');
-          gamePlay();
+          aiGamePlay();
         }, 2000);
       } else if(players.length == 2){
        //if Diesel is not chosen 
@@ -63,6 +63,61 @@
         }, 2000);
       }
     })
+  };
+
+  //game play logic
+  var aiGamePlay = function() {
+    moves = ['', '', '', '', '', '', '', '', ''];
+    playerTurn = players[0];
+    counter = 0;
+    
+    $('#playerTurnDiv').text(players[0] + "'s Turn!!");
+    console.log('Diesel aiGamePlay: ' + ' ' + counter + ' ' + moves + ' ' + playerTurn + ' ' + players);
+    
+    $('.cell').empty().removeClass().removeAttr('style').addClass('cell detox animated pulse')
+      .on('click', playerClick);
+          
+    $('#container').fadeIn(2000);
+    $('#board').fadeIn(2000);
+    $('#startScreen').fadeOut(2000);
+    $('#winnerDiv').removeClass().hide();
+  
+    //when a player clicks a cell
+    function playerClick() {
+
+
+      $(this).off("click").css('background-color', 'white').addClass(players[0]).css('background-size', 'contain');
+      moves[parseInt($(this).attr('id'))] = players[0];
+      playerTurn = players[1];
+      counter ++;
+      console.log(counter, moves, playerTurn);
+
+      if (counter > 4){
+        winConditions();
+      };
+      //Diesel/AI Move
+      dieselNum = (Math.floor(Math.random()*10) -1);
+      console.log(dieselNum + " line 95");
+      if (moves[dieselNum] == '') {
+        moves[dieselNum] = 'Diesel';
+        counter++;
+        playerTurn = players[0];
+      } else {
+        dieselNum = Math.floor(Math.random()*10);
+        console.log(dieselNum + " line 107");
+        moves[dieselNum] = 'Diesel';
+        counter++;
+        playerTurn = players[0];
+      };
+
+      // dieselNum = Math.floor(Math.random()*10);
+      // moves[dieselNum] = 'Diesel';
+      dieselChoice = $('#' + dieselNum);  //grabbing the cell with the id of number diesel
+      dieselChoice.off("click").css('background-color', 'white').addClass("Diesel").css('background-size', 'contain');
+      console.log("Diesel's move " + dieselChoice.id + "counter: " + counter);
+
+
+    };    
   };
 
   //game play logic
@@ -151,6 +206,7 @@
     } else {
       return;
     }
+    console.log("checked win condition");
     winnerIs();
   };
   
