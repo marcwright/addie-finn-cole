@@ -72,14 +72,15 @@
     counter = 0;
     
     $('#playerTurnDiv').text(players[0] + "'s Turn!!");
-    console.log(counter, moves, playerTurn);
+    console.log(counter, moves, playerTurn, players);
     
-    $('.cell').addClass('animated pulse')
+    $('.cell').empty().removeClass().removeAttr('style').addClass('cell detox animated pulse')
       .on('click', playerClick);
           
     $('#container').fadeIn(2000);
+    $('#board').fadeIn(2000);
     $('#startScreen').fadeOut(2000);
-    $('#winnerDiv').hide();
+    $('#winnerDiv').removeClass().hide();
   
     //when a player clicks a cell
     function playerClick() {
@@ -109,25 +110,23 @@
     
   };
 
-
-
-
   var winnerIs = function() {
-    $('.' + playerTurn).addClass('animated infinite flash'),
-    $('#board').fadeOut(3000),
+    $('.' + playerTurn),
+    $('#board').fadeOut(2000),
     $('.cell').off('click'),
-      $('#winnerDiv').delay(2000).fadeIn(3000).addClass(playerTurn).css('background-size', 'contain')
+      $('#winnerDiv').delay(1000).fadeIn(2000).addClass(playerTurn + ' detox').css('background-size', 'contain')
       .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; margin-top: 200px'><h1 class='animated wobble'>" + playerTurn + winDirection + '!</h1></div>');
       $('#playerTurnDiv').remove();
       console.log(winDirection);
 
-      $('.resetButton').show().on('click', function(){
-        console.log('line 117');
-        // $('#startScreen').empty().fadeIn();
-        // $('#appBody').append($('#startScreen'));
-        // return startGame();
-        window.location.reload();
-      });    
+      $('.resetButton').off('click').show().on('click', gamePlay);
+      //   function(){
+      //   console.log('line 117');
+      //   // $('#startScreen').empty().fadeIn();
+      //   // $('#appBody').append($('#startScreen'));
+      //   // return startGame();
+      //   window.location.reload();
+      // });    
   };
 
   var winConditions = function() {
