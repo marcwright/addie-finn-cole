@@ -24,11 +24,13 @@
         
         setTimeout(function(){
           $('.choice').removeClass('animated bounceInUp');
+          $('#clickChoice').addClass('animated flash');          
+          choosePlayerOne();
         }, 1000);
 
-        $('#clickChoice').addClass('animated flash');
-        setTimeout(function(){
-          choosePlayerOne();}, 2000);
+        // setTimeout(function(){
+        //   // choosePlayerOne();
+        // }, 1000);
       }
     });
     console.log('line 34'); 
@@ -78,38 +80,42 @@
     $('#container').fadeIn(2000);
     $('#startScreen').fadeOut(2000);
     $('#winnerDiv').hide();
-  };
+  
+    //when a player clicks a cell
+    function playerClick() {
+      $(this).off("click").css('background-color', 'white');
+      moves[parseInt($(this).attr('id'))] = playerTurn;
+      counter++;
+      console.log(counter, moves, playerTurn);
 
-  //when a player clicks a cell
-  var playerClick = function() {
-    $(this).off("click").css('background-color', 'white');
-    moves[parseInt($(this).attr('id'))] = playerTurn;
-    counter++;
-    console.log(counter, moves, playerTurn);
-
-    if (counter > 4){ 
-      winConditions();
-    }
-    switchTurn($(this));
-  };
-
-
-  //switches turns
-  var switchTurn = function(clickedCell) {
-    if (playerTurn == players[0]) {
-      $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
-      playerTurn = players[1];
-      $('#playerTurnDiv').text(players[1] + "'s Turn!!");
-    } else {
-      $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
-      playerTurn = players[0];
-      $('#playerTurnDiv').text(players[0] + "'s Turn!!");
+      if (counter > 4){ 
+        winConditions();
+      }
+      switchTurn($(this));
     };
+
+    //switches turns
+    function switchTurn(clickedCell) {
+      if (playerTurn == players[0]) {
+        $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
+        playerTurn = players[1];
+        $('#playerTurnDiv').text(players[1] + "'s Turn!!");
+      } else {
+        $(clickedCell).addClass(playerTurn).css('background-size', 'contain');
+        playerTurn = players[0];
+        $('#playerTurnDiv').text(players[0] + "'s Turn!!");
+      };
+    };
+    
   };
+
+
+
 
   var winnerIs = function() {
     $('.' + playerTurn).addClass('animated infinite flash'),
-    $('#board').fadeOut(4000),
+    $('#board').fadeOut(3000),
+    $('.cell').off('click'),
       $('#winnerDiv').delay(2000).fadeIn(3000).addClass(playerTurn).css('background-size', 'contain')
       .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; margin-top: 200px'><h1 class='animated wobble'>" + playerTurn + winDirection + '!</h1></div>');
       $('#playerTurnDiv').remove();
