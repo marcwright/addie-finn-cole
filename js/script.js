@@ -76,12 +76,19 @@
     })
   };
 
+  var updateScoresDiv = function(){
+    $('#p1ScoreDiv').html("<div>" + players[0] + "<br>" + playerScores.p1Score + "</div>");
+    $('#p2ScoreDiv').html("<div>" + players[1] + "<br>" + playerScores.p2Score + "</div>");
+  }
+
   //game play logic
   var gamePlay = function() {
     moves = ['', '', '', '', '', '', '', '', ''];
     playerTurn = players[0];
     counter = 0;
-    
+
+    updateScoresDiv();
+
     $('#playerTurnDiv').show().text(players[0] + "'s Turn!!");
     console.log(counter, moves, playerTurn, players);
     
@@ -122,11 +129,16 @@
   };
 
   var winnerIs = function() {
+
     if (playerTurn == playerScores.p1) {
       playerScores.p1Score++;
     } else {
       playerScores.p2Score++;
     }
+
+    updateScoresDiv();
+
+
     console.log(playerScores.p1 + " has " + playerScores.p1Score + ", " + playerScores.p2 + " has " + playerScores.p2Score) 
     
 
