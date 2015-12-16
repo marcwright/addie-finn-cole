@@ -1,9 +1,10 @@
-$(function() {
+// $(function() {
 
   var moves, counter, playerTurn, playerOne, playerTwo, players = [], dieselChoice, dieselNum = 0, winDirection;
   
 //Starts the game. It's called at the bottom of the script.
   var startGame = function() {
+    console.log('game started');
     //adding sound to an element
     // $('body').on('click', function(){
 
@@ -13,17 +14,24 @@ $(function() {
     $("#appBody").show();
     $('#container').hide();
     $('.choice').hide();
-    $('#clickChoice').typed({
+    console.log('line 17 before typed');
+    $('#clickChoice').show().typed({
       strings: ["Welcome to Tic-Tac-Toe ^1000 <br> With Addie, Finn and Cole!"],
       typeSpeed: 1,
       showCursor: false,
       callback: function() {
-        $('.choice').show().addClass('animated bounceInUp').removeClass('animated bounceInUp');
+        $('.choice').show().addClass('animated bounceInUp');
+        
+        setTimeout(function(){
+          $('.choice').removeClass('animated bounceInUp');
+        }, 1000);
+
         $('#clickChoice').addClass('animated flash');
         setTimeout(function(){
           choosePlayerOne();}, 2000);
       }
-    });    
+    });
+    console.log('line 34'); 
   };
   
 //Lets the player choose his/her avatar.
@@ -37,6 +45,7 @@ $(function() {
       console.log(players);
 
       //if Diesel (computer is chosen)
+      //Prepping for AI/Diesel logic
       if (players.length == 2 && players.indexOf('Diesel') > -1){
         $('#clickChoice').text(players[0] + " vs. " + players[1] + " You're playing the computer!!");
         setTimeout(function(){
@@ -64,7 +73,7 @@ $(function() {
     console.log(counter, moves, playerTurn);
     
     $('.cell').addClass('animated pulse')
-      .on('click', playerClick).removeClass('Finnman Addie Coleman');
+      .on('click', playerClick);
           
     $('#container').fadeIn(2000);
     $('#startScreen').fadeOut(2000);
@@ -105,7 +114,12 @@ $(function() {
       .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; margin-top: 200px'><h1 class='animated wobble'>" + playerTurn + winDirection + '!</h1></div>');
       $('#playerTurnDiv').remove();
       console.log(winDirection);
+
       $('.resetButton').show().on('click', function(){
+        console.log('line 117');
+        // $('#startScreen').empty().fadeIn();
+        // $('#appBody').append($('#startScreen'));
+        // return startGame();
         window.location.reload();
       });    
   };
@@ -113,31 +127,23 @@ $(function() {
   var winConditions = function() {
     if (moves[0] == playerTurn && moves[1] == playerTurn && moves[2] == playerTurn) {
       winDirection = ' wins on row 1';
-    }
-    else if (moves[3] == playerTurn && moves[4] == playerTurn && moves[5] == playerTurn) {
+    } else if (moves[3] == playerTurn && moves[4] == playerTurn && moves[5] == playerTurn) {
       winDirection = ' wins on row 2';
-    }
-    else if (moves[6] == playerTurn && moves[7] == playerTurn && moves[8] == playerTurn) {
+    } else if (moves[6] == playerTurn && moves[7] == playerTurn && moves[8] == playerTurn) {
       winDirection = ' wins on row 3';
-    }
-    else if (moves[0] == playerTurn && moves[4] == playerTurn && moves[8] == playerTurn || moves[2] == playerTurn && moves[4] == playerTurn && moves[6] == playerTurn) {
+    } else if (moves[0] == playerTurn && moves[4] == playerTurn && moves[8] == playerTurn || moves[2] == playerTurn && moves[4] == playerTurn && moves[6] == playerTurn) {
       winDirection = ' wins on the diagonal';
-    }
-    else if (moves[0] == playerTurn && moves[3] == playerTurn && moves[6] == playerTurn) {
+    } else if (moves[0] == playerTurn && moves[3] == playerTurn && moves[6] == playerTurn) {
       winDirection = ' wins in column 1';
-    }
-    else if (moves[1] == playerTurn && moves[4] == playerTurn && moves[7] == playerTurn) {
+    } else if (moves[1] == playerTurn && moves[4] == playerTurn && moves[7] == playerTurn) {
       winDirection = ' wins in column 2';
-    }
-    else if (moves[2] == playerTurn && moves[5] == playerTurn && moves[8] == playerTurn) {
+    } else if (moves[2] == playerTurn && moves[5] == playerTurn && moves[8] == playerTurn) {
       winDirection = ' wins in column 3';
-    }
-    else if (counter == 9) {
+    } else if (counter == 9) {
       winDirection = ' Game... No one wins';
       playerTurn = 'Cat';
       console.log("cats!");
-    }
-    else {
+    } else {
       return;
     }
     winnerIs();
@@ -146,7 +152,7 @@ $(function() {
   //on load this starts the game
   startGame();
 
-});
+// });
 
   //working on AI logic here
 

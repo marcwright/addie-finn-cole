@@ -4,6 +4,12 @@ body {
   text-align: center;
 }
 
+/*div {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}*/
+
 #appBody {
   margin: auto;
   width: 50%;
@@ -61,33 +67,6 @@ body {
   background-position: center; 
 }
 
-.Addie {  
-  background-image: url('../img/addie.png');
-}
-
-.Finnman {
-  background-image: url('../img/finn.png');
-}
-
-.Coleman {
-  background-image: url('../img/cole.png');
-}
-
-.Katy {  
-  background-image: url('../img/katy.png');
-}
-
-.Matt {
-  background-image: url('../img/matt.png');
-}
-
-.Diesel {
-  background-image: url('../img/diesel.png');
-}
-
-.Cat {
-  background-image: url('../img/cat.png');
-}
 
 #clickChoice {
   clear: both;
@@ -127,4 +106,31 @@ a {
     opacity:1;
     z-index:+1;
     -webkit-animation: pulse 1s infinite;
+}
+.Addie {  
+  background-image: url('../img/addie.png');
+}
+
+.Finnman {
+  background-image: url('../img/finn.png');
+}
+
+.Coleman {
+  background-image: url('../img/cole.png');
+}
+
+.Katy {  
+  background-image: url('../img/katy.png');
+}
+
+.Matt {
+  background-image: url('../img/matt.png');
+}
+
+.Diesel {
+  background-image: url('../img/diesel.png');
+}
+
+.Cat {
+  background-image: url('../img/cat.png');
 }
