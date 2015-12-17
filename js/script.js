@@ -14,7 +14,8 @@
     console.log(playerScores);
     console.log('game started');
     //adding sound to an element
-    // $('body').on('click', function(){
+    $('body').on('click')
+      // , function(){
 
     //   $(this).append('<embed src="http://www.freesfx.co.uk/rx2/mp3s/9/11105_1393961054.mp3" autostart="true" width="1" height="1" id="LegacySound" enablejavascript="true">');
     // });
@@ -52,7 +53,7 @@
       players.push($(this).attr('id'));
      
      $('#clickChoice').text("Player #2, click on your avatar!");
-      $(this).prepend("<div class='animated wobble' style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; color:white'>Player #" + players.length + ' is<br>' + this.id + '!</div>');
+      $(this).prepend("<div class='animated wobble' style='background-color:rgba(4,0,0, 0.3); border-radius: 25px; color:white'>Player #" + players.length + ' is<br>' + this.id + '!</div>');
       playerScores.p1 = players[0];
       playerScores.p2 = players[1];
       console.log(players, playerScores);
@@ -145,8 +146,9 @@
     $('.' + playerTurn),
     $('#board').fadeOut(2000),
     $('.cell').off('click'),
-      $('#winnerDiv').delay(1000).fadeIn(2000).addClass(playerTurn + ' detox').css('background-size', 'contain')
-      .html("<div style='background-color:rgba(4,0,0, 0.4); border-radius: 25px; margin-top: 200px'><h1 class='animated wobble'>" + playerTurn + winDirection + '!</h1></div>');
+    //adds custom win audio message
+    $('body').append("<embed src='mp3/" + playerTurn + ".mp3' autostart='true' width='1' height='1' id='LegacySound' enablejavascript='true'>"),
+      $('#winnerDiv').delay(1000).fadeIn(2000).addClass(playerTurn + ' detox').css('background-size', 'contain').html("<div style='background-color:rgba(4,0,0, 0.2); border-radius: 25px; margin-top: 200px'><h1 class='animated wobble'>" + playerTurn + winDirection + '!</h1></div>');
       $('#playerTurnDiv').hide();
       console.log(winDirection);
 
